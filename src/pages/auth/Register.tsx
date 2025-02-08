@@ -2,14 +2,28 @@ import { useState } from "react";
 import CForm from "../../components/customForm/CForm";
 import CInput from "../../components/customForm/CInput";
 import { Link } from "react-router";
+import { useRegisterMutation } from "../../redux/features/auth/authApi";
 
 const RegisterPage = () => {
     const [loading, setLoading] = useState(false);
+    const [register] = useRegisterMutation();
 
     const handleRegister = async (data: any) => {
-        setLoading(true);
-        console.log("Register data:", data);
-        setTimeout(() => setLoading(false), 2000); // Simulating API request
+        // setLoading(true);
+        const userInfo = {
+            ...data,
+            role : "user"
+        }
+        console.log("Register data:", userInfo);
+        // setTimeout(() => setLoading(false), 2000);
+
+        try {
+            const response = await register(userInfo).unwrap();
+            console.log("Register response:", response);
+        } catch (error) {
+            console.error("Register error:", error);
+        }
+
     };
 
     return (

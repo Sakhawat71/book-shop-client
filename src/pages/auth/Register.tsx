@@ -15,7 +15,6 @@ const RegisterPage = () => {
             role : "user"
         }
         console.log("Register data:", userInfo);
-        // setTimeout(() => setLoading(false), 2000);
 
         try {
             const response = await register(userInfo).unwrap();

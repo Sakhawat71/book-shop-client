@@ -1,24 +1,31 @@
-import { useState } from "react";
 import CForm from "../../components/customForm/CForm";
 import CInput from "../../components/customForm/CInput";
 import { Link } from "react-router";
 import { useRegisterMutation } from "../../redux/features/auth/authApi";
+import { toast } from "sonner";
 
 const RegisterPage = () => {
-    const [loading, setLoading] = useState(false);
     const [register] = useRegisterMutation();
 
     const handleRegister = async (data: any) => {
-        // setLoading(true);
+
         const userInfo = {
             ...data,
-            role : "user"
+            role: "user"
         }
-        console.log("Register data:", userInfo);
-
+        const toastId = toast.loading("Registering...");
         try {
-            const response = await register(userInfo).unwrap();
-            console.log("Register response:", response);
+            const response = await register(userInfo);
+
+            if (response?.data) {
+                toast.success(`${response.data.message}` || "Register success", { id: toastId });
+                console.log('Register success:', response.data.message);
+            }
+            if (response?.error) {
+                console.log('Register error:', response.error);
+                toast.error(response.error.data.error || response.error.data.message, { id: toastId });
+            }
+
         } catch (error) {
             console.error("Register error:", error);
         }
@@ -37,16 +44,36 @@ const RegisterPage = () => {
                 </h2>
 
                 <CForm onSubmit={handleRegister}>
-                    <CInput type="text" name="name" label="Name" placeholder="Enter your name" required />
-                    <CInput type="email" name="email" label="Email" placeholder="Enter your email" required />
-                    <CInput type="password" name="password" label="Password" placeholder="Enter your password" required />
+                    <CInput
+                        type="text"
+                        name="name"
+                        label="Name"
+                        placeholder="Enter your name"
+                        required
+                    />
+
+                    <CInput
+                        type="email"
+                        name="email"
+                        label="Email"
+                        placeholder="Enter your email"
+                        required
+                    />
+
+                    <CInput
+                        type="password"
+                        name="password"
+                        label="Password"
+                        placeholder="Enter your password"
+                        required
+                    />
 
                     <button
                         type="submit"
                         className="w-full px-4 py-3 mt-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-300"
-                        disabled={loading}
+                    // disabled={loading}
                     >
-                        {loading ? "Registering..." : "Register"}
+                        Register
                     </button>
 
                 </CForm>

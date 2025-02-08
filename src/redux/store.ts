@@ -8,7 +8,7 @@ import authReducer from './features/auth/authSlice';
 const persistConfig = {
     key: 'auth',
     storage,
-}
+};
 
 const persistedReducer = persistReducer(persistConfig , authReducer);
 

@@ -2,8 +2,12 @@ import { useState } from "react";
 import CForm from "../../components/customForm/CForm";
 import CInput from "../../components/customForm/CInput";
 import { Link } from "react-router";
-import { useAppDispatch } from "../../components/hooks";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
+import { verifytoken } from "../../utils/verifyToken";
+import { setUser } from "../../redux/features/auth/authSlice";
+import { useAppDispatch } from "../../redux/hooks";
+
+
 
 const LoginPage = () => {
     const [loading, setLoading] = useState(false);
@@ -15,18 +19,15 @@ const LoginPage = () => {
         console.log("Login data:", data);
         setTimeout(() => setLoading(false), 2000);
 
-        // const user = {
-        //     email: "admin@admin.com",
-        //     password: "Admin123"
-        // }
-        const res = await login(data).unwrap()
+        const res = await login(data)
         console.log(res);
 
-        const userData = verifytoken(res.data.accessToken) as TUser;
-        dispatch(setUser({
-            user: userData,
-            token: res.data.accessToken
-        }));
+        // .unwrap()
+        // const userData = verifytoken(res.data.accessToken);
+        // dispatch(setUser({
+        //     user: userData,
+        //     token: res.data.accessToken
+        // }));
 
 
     };

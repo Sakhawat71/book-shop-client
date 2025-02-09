@@ -1,6 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router";
 import logo from '../../assets/books.png';
-import { logOut, useCurrentToken } from "../../redux/features/auth/authSlice";
+import { logOut, useCurrentToken, useCurrentUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { verifytoken } from "../../utils/verifyToken";
 
@@ -8,13 +8,14 @@ import { verifytoken } from "../../utils/verifyToken";
 const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const user = useAppSelector(useCurrentUser);
     const token = useAppSelector(useCurrentToken);
 
-    // console.log(token);
+    // console.log(user?.userEmail);
 
     if (token) {
         const verifiedUser = verifytoken(token as string);
-        console.log(verifiedUser);
+        // console.log(verifiedUser);
     }
 
 
@@ -22,8 +23,6 @@ const Navbar = () => {
         dispatch(logOut());
         navigate("/login");
     };
-    // dispatch(logOut())
-
 
     const navLink = <>
         <li >
@@ -96,7 +95,7 @@ const Navbar = () => {
 
             <div className="navbar-end">
                 {
-                    token ?
+                    user?.userEmail ?
                         <button onClick={handleLogout} className="btn">Logout</button>
                         : <Link to='/login' className="btn">Login</Link>
                 }

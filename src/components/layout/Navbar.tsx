@@ -13,7 +13,7 @@ const Navbar = () => {
 
     if (token) {
         const verifiedUser = verifytoken(token as string);
-        console.log('token value'  , verifiedUser);
+        // console.log('token value'  , verifiedUser);
         user = verifiedUser;
     }
 

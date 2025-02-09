@@ -13,24 +13,31 @@ type TProtectedRoute = {
 const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
 
     const token = useAppSelector(useCurrentToken);
-    let user;
+    const dispatch = useAppDispatch();
+    let user: TUserLoginData | null = null;
 
     if (token) {
         user = verifytoken(token);
     }
-    // console.log(user?.role);
 
-    const dispatch = useAppDispatch();
+    // If no token, redirect to login
+    if (!token) {
+        return <Navigate to="/login" replace />;
+    }
 
-    if (role !== undefined && role !== (user as TUserLoginData)?.role) {
+    // Admin can access all routes
+    if (user?.role === "admin") {
+        return children;
+    }
+
+    if (role !== undefined && role !== user?.role) {
         dispatch(logOut());
         return <Navigate to="/login" replace={true} />;
     }
 
-    if (!token) {
-        return <Navigate to='/login' replace={true} />
-    }
-    return children;
+    
+    // return children;
+    return <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

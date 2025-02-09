@@ -1,11 +1,18 @@
 import CForm from "../../components/customForm/CForm";
 import CInput from "../../components/customForm/CInput";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useRegisterMutation } from "../../redux/features/auth/authApi";
 import { toast } from "sonner";
+import { useAppDispatch } from "../../redux/hooks";
+import { setUser } from "../../redux/features/auth/authSlice";
+import { verifytoken } from "../../utils/verifyToken";
+import { TUserLoginData } from "../../types/user.type";
 
 const RegisterPage = () => {
     const [register] = useRegisterMutation();
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
 
     const handleRegister = async (data: any) => {
 
@@ -15,16 +22,22 @@ const RegisterPage = () => {
         }
         const toastId = toast.loading("Registering...");
         try {
-            const response = await register(userInfo);
 
+            const response = await register(userInfo);
+            console.log(response);
             if (response?.data) {
                 toast.success(`${response.data.message}` || "Register success", { id: toastId });
-                console.log('Register success:', response.data.message);
             }
             if (response?.error) {
-                console.log('Register error:', response.error);
-                toast.error(response.error.data.error || response.error.data.message, { id: toastId });
+                toast.error(response?.error?.data.error as string || response.error.data.message, { id: toastId });
             }
+
+            const userData = verifytoken(response.data.data.token) as TUserLoginData;
+            console.log(userData);
+            dispatch(setUser({
+                user: userData,
+                token: response.data.data.token
+            }));
 
         } catch (error) {
             console.error("Register error:", error);

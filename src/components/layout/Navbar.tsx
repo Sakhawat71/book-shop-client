@@ -1,8 +1,29 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import logo from '../../assets/books.png';
+import { logOut, useCurrentToken } from "../../redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { verifytoken } from "../../utils/verifyToken";
 
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const token = useAppSelector(useCurrentToken);
+
+    // console.log(token);
+
+    if (token) {
+        const verifiedUser = verifytoken(token as string);
+        console.log(verifiedUser);
+    }
+
+
+    const handleLogout = () => {
+        dispatch(logOut());
+        navigate("/login");
+    };
+    // dispatch(logOut())
+
 
     const navLink = <>
         <li >
@@ -74,51 +95,12 @@ const Navbar = () => {
 
 
             <div className="navbar-end">
-                <Link to='/login' className="btn">Login</Link>
-            </div>
-
-            {/* user => Profile or login */}
-            {/* <div className="navbar-end">
-
                 {
-                    user?.email
-                        ?
-                        <div className="dropdown dropdown-end dropdown-bottom flex items-center">
-
-                        
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-xl space-y-2 ">
-
-                                <p className="flex pl-3 items-center ">
-                                    <FaRegUser className="pr-2" /> 
-                                    <span>Profile</span>
-                                </p>
-
-                                <li className="hover:font-bold">
-                                    <Link to="/dashboard/my-profile">
-                                        <MdDashboard />
-                                        Dashboard</Link>
-                                </li>
-
-                                <li className="hover:font-bold">
-                                    <button onClick={handelLogOut}>
-                                        <MdLogout />
-                                        Logout</button>
-                                </li>
-                            </ul>
-
-                        </div>
-                        :
-
-                        <Link to={loading ? '#' : '/login'} >
-                            <AwesomeButton
-                                type="secondary"
-                                className="aws-btn"
-                            >{loading ? <ImSpinner6 className="animate-spin" /> : 'Join US'}</AwesomeButton>
-
-                        </Link>
+                    token ?
+                        <button onClick={handleLogout} className="btn">Logout</button>
+                        : <Link to='/login' className="btn">Login</Link>
                 }
-
-            </div> */}
+            </div>
 
         </div>
     );

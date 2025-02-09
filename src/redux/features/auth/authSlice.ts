@@ -2,10 +2,11 @@ import { RootState } from './../../store';
 import { createSlice } from "@reduxjs/toolkit";
 
 export type TUser = {
-    userId: string;
+    exp: number;
+    iat: number;
+    id: string;
     role: string;
-    iat?: number
-    exp?: number
+    userEmail: string;
 };
 
 type authState = {

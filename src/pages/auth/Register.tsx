@@ -24,20 +24,22 @@ const RegisterPage = () => {
         try {
 
             const response = await register(userInfo);
-            console.log(response);
+            // console.log(response);
             if (response?.data) {
                 toast.success(`${response.data.message}` || "Register success", { id: toastId });
             }
             if (response?.error) {
-                toast.error(response?.error?.data.error as string || response.error.data.message, { id: toastId });
+                const message = await response?.error?.data.error as string || response.error.data.message as string;
+                toast.error( message, { id: toastId });
             }
 
             const userData = verifytoken(response.data.data.token) as TUserLoginData;
-            console.log(userData);
+            // console.log(userData);
             dispatch(setUser({
                 user: userData,
                 token: response.data.data.token
             }));
+            navigate("/");
 
         } catch (error) {
             console.error("Register error:", error);

@@ -1,35 +1,40 @@
-import { useState } from "react";
 import CForm from "../../components/customForm/CForm";
 import CInput from "../../components/customForm/CInput";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { verifytoken } from "../../utils/verifyToken";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
-
+import { TUserLoginData } from "../../types/user.type";
+import { toast } from "sonner";
 
 
 const LoginPage = () => {
-    const [loading, setLoading] = useState(false);
     const dispatch = useAppDispatch();
     const [login] = useLoginMutation();
+    const navigate = useNavigate();
 
     const handleLogin = async (data: any) => {
-        setLoading(true);
-        console.log("Login data:", data);
-        setTimeout(() => setLoading(false), 2000);
+        const toastId = toast.loading("Logging in...");
 
-        const res = await login(data)
-        console.log(res);
-
-        // .unwrap()
-        // const userData = verifytoken(res.data.accessToken);
-        // dispatch(setUser({
-        //     user: userData,
-        //     token: res.data.accessToken
-        // }));
-
-
+        try {
+            const res = await login(data).unwrap();
+            // console.log(res);
+    
+            if (res?.data?.token) {
+                const userData = verifytoken(res.data.token) as TUserLoginData;
+                // console.log(userData);
+                dispatch(setUser({
+                    user: userData,
+                    token: res.data.token
+                }));
+                toast.success("Login success", { id: toastId });
+                navigate("/");
+            }
+        } catch (error) {
+            toast.error( error?.data?.error || error?.data?.message, { id: toastId });
+            // console.log(error);
+        }
     };
 
     return (
@@ -50,9 +55,10 @@ const LoginPage = () => {
                     <button
                         type="submit"
                         className="w-full px-4 py-3 mt-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-300"
-                        disabled={loading}
+                        // disabled={loading}
                     >
-                        {loading ? "Logging in..." : "Login"}
+                        {/* {loading ? "Logging in..." : "Login"} */}
+                        Login
                     </button>
                 </CForm>
 

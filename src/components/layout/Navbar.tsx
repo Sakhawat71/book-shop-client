@@ -1,6 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router";
 import logo from '../../assets/books.png';
-import { logOut, useCurrentToken, useCurrentUser } from "../../redux/features/auth/authSlice";
+import { logOut, useCurrentToken} from "../../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { verifytoken } from "../../utils/verifyToken";
 
@@ -8,14 +8,13 @@ import { verifytoken } from "../../utils/verifyToken";
 const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const user = useAppSelector(useCurrentUser);
     const token = useAppSelector(useCurrentToken);
-
-    // console.log(user?.userEmail);
+    let user;
 
     if (token) {
         const verifiedUser = verifytoken(token as string);
-        // console.log(verifiedUser);
+        console.log('token value'  , verifiedUser);
+        user = verifiedUser;
     }
 
 
@@ -45,7 +44,8 @@ const Navbar = () => {
 
         <li >
             <NavLink
-                to="/dashboard"
+                {...user?.role === "admin" ?{ to: "/admin/dashboard" } : { to: "/user/dashboard" }}
+                // to="/dashboard"
                 className={({ isActive, isPending }) =>
                     isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-black"
                 }

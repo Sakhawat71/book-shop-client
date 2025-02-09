@@ -4,7 +4,9 @@ import Register from "../pages/auth/Register";
 import MainLayout from "../components/layout/MainLayout";
 import Products from "../pages/Products/Products";
 import AboutUs from "../pages/AboutUs";
-import Dashboard from "../pages/Dashboard";
+import UserDashboard from "../pages/Dashboard/UserDashboard";
+import AdminDashboard from "../pages/Dashboard/AdminDashboard";
+import ProtectedRoute from "../utils/ProtectedRoute";
 
 
 const router = createBrowserRouter([
@@ -13,8 +15,20 @@ const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
             {
-                path: '/dashboard',
-                element: <Dashboard />,
+                path: '/user/dashboard',
+                element: (
+                    <ProtectedRoute role="user" >
+                        <UserDashboard />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: '/admin/dashboard',
+                element: (
+                    <ProtectedRoute role="admin" >
+                        <AdminDashboard />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: '/products',

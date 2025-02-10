@@ -11,11 +11,19 @@ const productsManagementApi = baseApi.injectEndpoints({
             })
         }),
 
+        getProductById : builder.query({
+            query: (id: string) => ({
+                url: `/products/${id}`,
+                method: 'GET',
+            })
+            
+        })
     })
 });
 
 
 export const {
     useGetProductsQuery,
+    useGetProductByIdQuery,
 
 } = productsManagementApi;

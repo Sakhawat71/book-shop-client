@@ -25,7 +25,7 @@ const Products = () => {
 
     // Fetch products
     const { data: products, isLoading } = useGetProductsQuery(queryParams);
-    console.log(products);
+    // console.log(products);
 
 
     // Handle search input

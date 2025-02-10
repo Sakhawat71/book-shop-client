@@ -7,6 +7,7 @@ import AboutUs from "../pages/AboutUs";
 import UserDashboard from "../pages/Dashboard/UserDashboard";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard";
 import ProtectedRoute from "../utils/ProtectedRoute";
+import ProductDetails from "../pages/Products/ProductDetails";
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: '/products',
                 element: <Products />,
+            },
+            {
+                path: '/products/:id',
+                element: <ProductDetails />,
             },
             {
                 path: '/about',

@@ -1,6 +1,8 @@
+import { Link } from "react-router";
 import { IProduct } from "../../types/productes.type";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
+
     const {
         _id,
         title,
@@ -53,12 +55,12 @@ const ProductCard = ({ product }: { product: IProduct }) => {
 
                 {/* Action Button */}
                 <div className="card-actions justify-end mt-6">
-                    <button
-                        onClick={() => console.log(_id)}
+                    <Link
+                        to={`/products/${_id}`}
                         className="btn btn-primary btn-sm"
                     >
                         View Details
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>

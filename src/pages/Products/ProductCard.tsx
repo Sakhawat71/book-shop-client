@@ -16,7 +16,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
     } = product;
 
     return (
-        <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 border border-gray-200">
+        <div className="card bg-base-100 shadow-2xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 border border-gray-200">
             {/* Card Body */}
             <div className="card-body p-6">
                 {/* Stock Status and Quantity */}

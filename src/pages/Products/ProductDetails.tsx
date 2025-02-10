@@ -2,13 +2,14 @@ import { useParams } from "react-router";
 import LoadingSpinner from "../../components/layout/LoadingSpinner.tsx";
 import { useGetProductByIdQuery, useGetProductsQuery } from "../../redux/features/products/productsManagement.api";
 import ProductCard from "./ProductCard.tsx";
+import { IProduct } from "../../types/productes.type.ts";
 
 const ProductDetails = () => {
     const { id } = useParams<{ id: string }>();
     const { data: product, isLoading, isError } = useGetProductByIdQuery(id as string);
     const { data: relatedProducts } = useGetProductsQuery(product?.data.category);
 
-    console.log(relatedProducts);
+    // console.log(relatedProducts);
     // console.log(product?.data.category);
 
     if (isLoading) {
@@ -85,7 +86,7 @@ const ProductDetails = () => {
                 <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-6">
                     
                     {
-                        relatedProducts?.data?.map((product: any) =>
+                        relatedProducts?.data?.map((product: IProduct) =>
                             <ProductCard key={product._id} product={product} />
                         )
                     }

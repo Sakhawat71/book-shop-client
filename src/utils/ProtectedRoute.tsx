@@ -34,10 +34,8 @@ const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
         dispatch(logOut());
         return <Navigate to="/login" replace={true} />;
     }
-
     
-    // return children;
-    return <Navigate to="/login" replace />;
+    return children;
 };
 
 export default ProtectedRoute;

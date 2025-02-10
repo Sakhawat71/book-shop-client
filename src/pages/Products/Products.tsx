@@ -1,27 +1,43 @@
 import { useGetProductsQuery } from "../../redux/features/products/productsManagement.api";
 import { Link, useSearchParams } from "react-router";
+import { useState } from "react";
+import ProductCard from "./ProductCard";
+import { IProduct } from "../../types/productes.type";
 
 const Products = () => {
     // Query parameters for backend
     const [searchParams, setSearchParams] = useSearchParams();
-    const searchTerm = searchParams.get("search") || "";
+    const [search, setSearch] = useState(searchParams.get("search") || "");
+
     const category = searchParams.get("category") || "";
     const author = searchParams.get("author") || "";
     const priceRange = searchParams.get("price") || "";
     const inStock = searchParams.get("inStock") || "";
 
-    // Fetch products based on query params
-    const { data: products, isLoading } = useGetProductsQuery({
-        search: searchTerm,
-        category,
-        author,
-        price: priceRange,
-        inStock,
-    });
+    // Construct query params
+    const queryParams = {
+        searchTerm: search || undefined,
+        category: category || undefined,
+        author: author || undefined,
+        inStock: inStock ? inStock === "true" : undefined,
+        priceRange: priceRange ? Number(priceRange) : undefined,
+    };
+
+    // Fetch products
+    const { data: products, isLoading } = useGetProductsQuery(queryParams);
+    console.log(products);
+
 
     // Handle search input
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchParams({ search: event.target.value });
+        const value = event.target.value;
+        setSearch(value);
+        setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+            if (value) params.set("search", value);
+            else params.delete("search");
+            return params;
+        });
     };
 
     // Handle filter changes
@@ -36,17 +52,16 @@ const Products = () => {
 
     return (
         <div className="container mx-auto px-4 py-6">
-            {/* Search Bar */}
+            {/* Search & Filters */}
             <div className="flex flex-col md:flex-row items-center gap-4">
                 <input
                     type="text"
                     placeholder="Search by title, author, or category..."
                     className="input input-bordered w-full md:w-1/2"
                     onChange={handleSearch}
-                    defaultValue={searchTerm}
+                    value={search}
                 />
 
-                {/* Filters */}
                 <select
                     className="select select-bordered"
                     onChange={(e) => handleFilterChange("category", e.target.value)}
@@ -78,13 +93,14 @@ const Products = () => {
                     <option value="false">Out of Stock</option>
                 </select>
 
-                <input type="range"
+                <input
+                    type="range"
                     className="range range-primary w-40"
                     min={0}
                     max={100}
                     step={10}
                     onChange={(e) => handleFilterChange("price", e.target.value)}
-                    defaultValue={priceRange}
+                    value={priceRange}
                 />
             </div>
 
@@ -92,29 +108,8 @@ const Products = () => {
             {isLoading && <p className="text-center text-gray-500">Loading products...</p>}
 
             {/* Product List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-                {products?.data?.length ? (
-                    products.data.map((product: any) => (
-                        <div key={product._id} className="card bg-base-100 shadow-lg p-4">
-                            <div className="card-body">
-                                <h2 className="card-title">{product.title}</h2>
-                                <p className="text-sm text-gray-500">{product.author}</p>
-                                <p className="font-semibold text-lg">${product.price}</p>
-                                <p className="text-xs badge badge-secondary">{product.category}</p>
-                                <p className={`badge ${product.inStock ? "badge-success" : "badge-error"}`}>
-                                    {product.inStock ? "In Stock" : "Out of Stock"}
-                                </p>
-                                <div className="card-actions justify-end">
-                                    <Link to={`/product/${product._id}`} className="btn btn-primary">
-                                        View Details
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p className="text-center col-span-full text-gray-500">No products found.</p>
-                )}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-10 mt-10 ">
+                {products?.data?.map((product : IProduct) => <ProductCard product={product}  />)}
             </div>
         </div>
     );

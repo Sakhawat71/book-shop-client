@@ -8,6 +8,7 @@ import UserDashboard from "../pages/Dashboard/UserDashboard";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard";
 import ProtectedRoute from "../utils/ProtectedRoute";
 import ProductDetails from "../pages/Products/ProductDetails";
+import HomePage from "../pages/home/HomePage";
 
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
         path: '/',
         element: <MainLayout />,
         children: [
+            {
+                path: '/',
+                element: <HomePage />,
+            },
             {
                 path: '/user/dashboard',
                 element: (

@@ -75,7 +75,6 @@ const ProductDetails = () => {
 
                 {/* Action Buttons */}
                 <div className="flex justify-center gap-4 mt-8">
-                    <button className="btn btn-primary btn-lg">Add to Cart</button>
                     <button className="btn btn-outline btn-lg">Buy Now</button>
                 </div>
             </div>
@@ -84,7 +83,6 @@ const ProductDetails = () => {
             <div className="mt-12">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Products</h2>
                 <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    
                     {
                         relatedProducts?.data?.map((product: IProduct) =>
                             <ProductCard key={product._id} product={product} />

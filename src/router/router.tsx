@@ -9,6 +9,7 @@ import AdminDashboard from "../pages/Dashboard/AdminDashboard";
 import ProtectedRoute from "../utils/ProtectedRoute";
 import ProductDetails from "../pages/Products/ProductDetails";
 import HomePage from "../pages/home/HomePage";
+import CheckoutPage from "../pages/Checkout/Checkout";
 
 
 const router = createBrowserRouter([
@@ -43,6 +44,14 @@ const router = createBrowserRouter([
             {
                 path: '/products/:id',
                 element: <ProductDetails />,
+            },
+            {
+                path: '/checkout/:id',
+                element: (
+                    <ProtectedRoute role="user" >
+                        <CheckoutPage />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: '/about',

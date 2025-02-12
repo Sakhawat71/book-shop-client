@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import LoadingSpinner from "../../components/layout/LoadingSpinner.tsx";
 import { useGetProductByIdQuery, useGetProductsQuery } from "../../redux/features/products/productsManagement.api";
 import ProductCard from "./ProductCard.tsx";
@@ -7,7 +7,7 @@ import { IProduct } from "../../types/productes.type.ts";
 const ProductDetails = () => {
     const { id } = useParams<{ id: string }>();
     const { data: product, isLoading, isError } = useGetProductByIdQuery(id as string);
-    const { data: relatedProducts } = useGetProductsQuery(product?.data.category);
+    const { data: relatedProducts } = useGetProductsQuery(product?.data?.category);
 
     // console.log(relatedProducts);
     // console.log(product?.data.category);
@@ -21,6 +21,7 @@ const ProductDetails = () => {
     }
 
     const {
+        _id,
         title,
         author,
         price,
@@ -30,6 +31,8 @@ const ProductDetails = () => {
         inStock,
         createdAt,
     } = product?.data;
+
+    console.log(inStock);
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -75,8 +78,20 @@ const ProductDetails = () => {
 
                 {/* Action Buttons */}
                 <div className="flex justify-center gap-4 mt-8">
-                    <button className="btn btn-outline btn-lg">Buy Now</button>
+                    {
+                        inStock ?
+                            <Link
+                                to={`/checkout/${_id}`}
+                                className="btn btn-outline btn-lg"
+                            >Buy Now</Link>
+                            :
+                            <button
+                                disabled
+                                className="btn btn-outline btn-lg"
+                            >Out of Stock</button>
+                    }
                 </div>
+
             </div>
 
             {/* Related Products Section (Optional) */}

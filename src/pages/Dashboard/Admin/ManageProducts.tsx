@@ -8,8 +8,6 @@ const ProductManagement = () => {
     const [searchText, setSearchText] = useState("");
     const {data : products} = useGetProductsQuery({});
 
-    console.log(products);
-
     const filteredProducts = products?.data?.filter((product : IProduct) =>
         product.title.toLowerCase().includes(searchText.toLowerCase())
     );

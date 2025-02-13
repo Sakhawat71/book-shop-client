@@ -6,7 +6,7 @@ const productsManagementApi = baseApi.injectEndpoints({
         getProducts: builder.query({
             query: (params?: Record<string, any>) => {
                 // console.log(params);
-                console.log( " search ",params?.searchTerm);
+                // console.log( " search ",params?.searchTerm);
                 return {
                     url: `/products?searchTerm=${params}`,
                     method: 'GET',

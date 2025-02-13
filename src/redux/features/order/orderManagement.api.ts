@@ -11,7 +11,6 @@ const ordersManagementApi = baseApi.injectEndpoints({
                     body: data
                 }
             }
-
         }),
 
         getAllOrders: builder.query({

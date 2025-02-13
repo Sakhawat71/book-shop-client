@@ -29,22 +29,22 @@ const AddProducts = () => {
             quantity: Number(data.quantity),
             inStock: Boolean(data.inStock)
         };
-    
-        const toastId = toast.loading('Creating product...',{duration: 200});
-    
+
+        const toastId = toast.loading('Creating product...', { duration: 200 });
+
         const res = await addProduct(productData);
-    
+
         if (res.data) {  // Success case
-            toast.success(res.data.message, { 
+            toast.success(res.data.message, {
                 id: toastId,
-                duration: 2000 
+                duration: 2000
             });
             methods.reset();
         } else if (res.error) {  // Error case
             const errorMessage = (res.error as any).data?.message || 'Failed to create product';
-            toast.error(errorMessage, { 
+            toast.error(errorMessage, {
                 id: toastId,
-                duration: 3000 
+                duration: 3000
             });
         }
     };
@@ -52,79 +52,82 @@ const AddProducts = () => {
     return (
         <div className="max-w-4xl mx-auto py-8">
             <h1 className="text-3xl font-bold text-center mb-8">Add New Product</h1>
+
             <CForm onSubmit={onSubmit} {...methods}>
-                {/* Product Title */}
-                <CInput
-                    type="text"
-                    name="title"
-                    label="Product Title"
-                    placeholder="Enter product title"
-                    required
-                />
 
-                {/* Author */}
-                <CInput
-                    type="text"
-                    name="author"
-                    label="Author"
-                    placeholder="Enter author name"
-                    required
-                />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    {/* Product Title */}
+                    <CInput
+                        type="text"
+                        name="title"
+                        label="Product Title"
+                        placeholder="Enter product title"
+                        required
+                    />
 
-                {/* Price */}
-                <CInput
-                    type="number"
-                    name="price"
-                    label="Price"
-                    placeholder="Enter product price"
-                    required
-                />
+                    {/* Author */}
+                    <CInput
+                        type="text"
+                        name="author"
+                        label="Author"
+                        placeholder="Enter author name"
+                        required
+                    />
 
-                {/* Category */}
-                <CSelect
-                    name="category"
-                    label="Category"
-                    required
-                    options={
-                        [
-                            { value: "Fiction", label: "Fiction" },
-                            { value: "Science", label: "Science" },
-                            { value: "SelfDevelopment", label: "SelfDevelopment" },
-                            { value: "Poetry", label: "Poetry" },
-                            { value: "Religious", label: "Religious" },
-                        ]
-                    }
-                />
+                    {/* Price */}
+                    <CInput
+                        type="number"
+                        name="price"
+                        label="Price"
+                        placeholder="Enter product price"
+                        required
+                    />
 
+                    {/* Category */}
+                    <CSelect
+                        name="category"
+                        label="Category"
+                        required
+                        options={
+                            [
+                                { value: "Fiction", label: "Fiction" },
+                                { value: "Science", label: "Science" },
+                                { value: "SelfDevelopment", label: "SelfDevelopment" },
+                                { value: "Poetry", label: "Poetry" },
+                                { value: "Religious", label: "Religious" },
+                            ]
+                        }
+                    />
 
-                {/* Description */}
-                <CTextarea
-                    name="description"
-                    label="Description"
-                    placeholder="Enter product description"
-                    required
-                />
+                    {/* Description */}
+                    <CTextarea
+                        name="description"
+                        label="Description"
+                        placeholder="Enter product description"
+                        required
+                    />
 
-                {/* Quantity */}
-                <CInput
-                    type="number"
-                    name="quantity"
-                    label="Quantity"
-                    placeholder="Enter product quantity"
-                    required
-                />
+                    {/* Quantity */}
+                    <CInput
+                        type="number"
+                        name="quantity"
+                        label="Quantity"
+                        placeholder="Enter product quantity"
+                        required
+                    />
 
-                {/* In Stock */}
-                <CSelect
-                    name="inStock"
-                    label="In Stock"
-                    required
-                    options={[
-                        { value: "true", label: "Yes" },
-                        { value: "false", label: "No" },
-                    ]}
-                />
+                    {/* In Stock */}
+                    <CSelect
+                        name="inStock"
+                        label="In Stock"
+                        required
+                        options={[
+                            { value: "true", label: "Yes" },
+                            { value: "false", label: "No" },
+                        ]}
+                    />
 
+                </div>
                 {/* Submit Button */}
                 <button
                     type="submit"
@@ -142,6 +145,7 @@ const AddProducts = () => {
                     Add Product
                 </button>
             </CForm>
+
         </div>
     );
 };

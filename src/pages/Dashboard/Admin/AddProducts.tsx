@@ -19,7 +19,7 @@ const AddProducts = () => {
             image: "",
             description: "",
             quantity: 0,
-            inStock: true,
+            inStock: "true",
         },
     });
 
@@ -28,20 +28,21 @@ const AddProducts = () => {
             ...data,
             price: Number(data.price),
             quantity: Number(data.quantity),
-            inStock: Boolean(data.inStock) || true ,
+            inStock: data.inStock === "true",
         };
+
 
         const toastId = toast.loading('Creating product...', { duration: 200 });
 
         const res = await addProduct(productData);
 
-        if (res.data) {  // Success case
+        if (res.data) {
             toast.success(res.data.message, {
                 id: toastId,
                 duration: 2000
             });
             methods.reset();
-        } else if (res.error) {  // Error case
+        } else if (res.error) {
             const errorMessage = (res.error as any).data?.message || 'Failed to create product';
             toast.error(errorMessage, {
                 id: toastId,
@@ -98,6 +99,7 @@ const AddProducts = () => {
                         name="category"
                         label="Category"
                         required
+                        placeholder="Select an option"
                         options={
                             [
                                 { value: "Fiction", label: "Fiction" },
@@ -131,6 +133,7 @@ const AddProducts = () => {
                         name="inStock"
                         label="In Stock"
                         required
+                        placeholder="Select an option"
                         options={[
                             { value: "true", label: "Yes" },
                             { value: "false", label: "No" },

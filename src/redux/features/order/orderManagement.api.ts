@@ -14,18 +14,27 @@ const ordersManagementApi = baseApi.injectEndpoints({
 
         }),
 
-        // getProductById: builder.query({
-        //     query: (id: string) => ({
-        //         url: `/products/${id}`,
-        //         method: 'GET',
-        //     })
+        getAllOrders: builder.query({
+            query: () => ({
+                url: `/orders`,
+                method: 'GET',
+            })
+        }),
 
-        // })
+
+        getOrderById: builder.query({
+            query: (id: string) => ({
+                url: `/orders/${id}`,
+                method: 'GET',
+            })
+
+        })
     })
 });
 
 
 export const {
-    useCreateOrderMutation
-
+    useCreateOrderMutation,
+    useGetAllOrdersQuery,
+    useGetOrderByIdQuery
 } = ordersManagementApi;

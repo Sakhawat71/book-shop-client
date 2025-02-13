@@ -12,6 +12,13 @@ const adminManagementApi = baseApi.injectEndpoints({
             }
         }),
 
+        getUserByEmail: builder.query({
+            query: (email) => ({
+                url: `/users/email/${email}`,
+                method: 'GET'
+            }),
+        }),
+
         addProduct: builder.mutation({
             query: (data) => ({
                 url: '/products',
@@ -20,7 +27,7 @@ const adminManagementApi = baseApi.injectEndpoints({
             })
         }),
 
-        
+
 
 
     })
@@ -30,4 +37,5 @@ const adminManagementApi = baseApi.injectEndpoints({
 export const {
     useGetUsersQuery,
     useAddProductMutation,
+    useGetUserByEmailQuery,
 } = adminManagementApi;

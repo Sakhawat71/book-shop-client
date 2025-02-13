@@ -32,10 +32,10 @@ const ProductDetails = () => {
         createdAt,
     } = product?.data;
 
-    console.log(inStock);
+    // console.log(inStock);
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 bg-gray-100">
             {/* Product Details Section */}
             <div className="max-w-4xl mx-auto">
                 {/* Title and Author */}

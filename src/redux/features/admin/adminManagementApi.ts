@@ -18,8 +18,9 @@ const adminManagementApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: data,
             })
-        })
+        }),
 
+        
 
 
     })

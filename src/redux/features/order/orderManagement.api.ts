@@ -21,9 +21,9 @@ const ordersManagementApi = baseApi.injectEndpoints({
         }),
 
 
-        getOrderById: builder.query({
-            query: (id: string) => ({
-                url: `/orders/${id}`,
+        getOrderByEmail: builder.query({
+            query: (email: string) => ({
+                url: `/orders/${email}`,
                 method: 'GET',
             })
 
@@ -35,5 +35,5 @@ const ordersManagementApi = baseApi.injectEndpoints({
 export const {
     useCreateOrderMutation,
     useGetAllOrdersQuery,
-    useGetOrderByIdQuery
+    useGetOrderByEmailQuery,
 } = ordersManagementApi;

@@ -1,10 +1,15 @@
-import {Button, Spin, Table } from "antd";
-import { useGetAllOrdersQuery } from "../../../redux/features/order/orderManagement.api";
+import { Spin, Table } from "antd";
+import { useGetOrderByEmailQuery } from "../../../redux/features/order/orderManagement.api";
+import { useAppSelector } from "../../../redux/hooks";
+import { useCurrentToken } from "../../../redux/features/auth/authSlice";
+import { verifytoken } from "../../../utils/verifyToken";
 
 const UserOrders = () => {
-    const { data, isLoading, error } = useGetAllOrdersQuery(undefined);
 
-    // Order data transformation (if needed)
+    const token = useAppSelector(useCurrentToken);
+    const user = verifytoken(token!);
+
+    const { data, isLoading, error } = useGetOrderByEmailQuery(user?.userEmail!);
     const orders = data?.data || [];
 
     if (isLoading) {

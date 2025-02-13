@@ -12,7 +12,7 @@ const UserDashboard = () => {
 
     const userLink = (
         <>
-            <li>
+            {/* <li>
                 <NavLink
                     to={'my-profile'}
                     className={({ isActive, isPending }) =>
@@ -24,7 +24,7 @@ const UserDashboard = () => {
                         My Profile
                     </span>
                 </NavLink>
-            </li>
+            </li> */}
 
             <li>
                 <NavLink

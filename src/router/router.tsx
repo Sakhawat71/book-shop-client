@@ -10,6 +10,11 @@ import ProtectedRoute from "../utils/ProtectedRoute";
 import ProductDetails from "../pages/Products/ProductDetails";
 import HomePage from "../pages/home/HomePage";
 import CheckoutPage from "../pages/Checkout/Checkout";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
+import ManageOrders from "../pages/Dashboard/Admin/ManageOrders";
+import AddProducts from "../pages/Dashboard/Admin/AddProducts";
+import ManageProducts from "../pages/Dashboard/Admin/ManageProducts";
+import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
 
 
 const router = createBrowserRouter([
@@ -29,13 +34,13 @@ const router = createBrowserRouter([
                     </ProtectedRoute>
                 ),
                 children: [
-                    // {
-                        
-                    //     element: <div>user</div>
-                    // },
                     {
-                        path: 'my-profile',
+                        index : true,
                         element: <div>user</div>
+                    },
+                    {
+                        path: 'my-orders',
+                        element: <div>user orders</div>
                     },
                 ]
             },
@@ -48,20 +53,24 @@ const router = createBrowserRouter([
                 ),
                 children : [
                     {
-                        path : '',
-                        element: <div></div>
+                        index : true ,
+                        element: <AdminProfile />
                     },
                     {
                         path : 'manage-users',
-                        element: <div></div>
+                        element: <ManageUsers />
                     },
                     {
                         path : 'manage-orders',
-                        element: <div></div>
+                        element: <ManageOrders />
+                    },
+                    {
+                        path : 'add-product',
+                        element: <AddProducts />
                     },
                     {
                         path : 'manage-products',
-                        element: <div></div>
+                        element: <ManageProducts />
                     },
                 ]
             },

@@ -2,6 +2,7 @@ import { Link, NavLink, Outlet } from "react-router";
 import logo from '../../../assets/books.png';
 import { useState } from "react";
 import { FaBars, FaTimes, FaUsers, FaBox, FaShoppingCart, FaChartLine } from "react-icons/fa";
+import { FaBoxesStacked } from "react-icons/fa6";
 
 const AdminDashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -14,21 +15,6 @@ const AdminDashboard = () => {
         <>
             <li>
                 <NavLink
-                    to={''}
-                    className={({ isActive, isPending }) =>
-                        isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
-                    }
-                    onClick={() => setIsSidebarOpen(false)}
-                >
-                    <span className="flex items-center gap-2">
-                        <FaChartLine className="text-lg" />
-                        Dashboard
-                    </span>
-                </NavLink>
-            </li>
-
-            <li>
-                <NavLink
                     to={'manage-users'}
                     className={({ isActive, isPending }) =>
                         isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
@@ -38,6 +24,21 @@ const AdminDashboard = () => {
                     <span className="flex items-center gap-2">
                         <FaUsers className="text-lg" />
                         Manage Users
+                    </span>
+                </NavLink>
+            </li>
+
+            <li>
+                <NavLink
+                    to={'add-product'}
+                    className={({ isActive, isPending }) =>
+                        isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
+                    }
+                    onClick={() => setIsSidebarOpen(false)}
+                >
+                    <span className="flex items-center gap-2">
+                    <FaBoxesStacked className="text-lg" />
+                        Add Product
                     </span>
                 </NavLink>
             </li>

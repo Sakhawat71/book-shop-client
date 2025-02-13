@@ -27,22 +27,25 @@ const AddProducts = () => {
             ...data,
             price: Number(data.price),
             quantity: Number(data.quantity),
-            inStock: Boolean(data.inStock),
+            inStock: Boolean(data.inStock)
         };
-
-        const toastId = toast.loading('Product creating....');
-
-        try {
-            const res = await addProduct(productData);
-            console.log(res);
-            if (res?.data?.success) {
-                toast.message(res?.data?.message, { id: toastId })
-            }
-            if (res?.error?.data?.success) {
-                toast.error(res?.error?.data?.message, { id: toastId })
-            }
-        } catch (error) {
-            toast.error('Can`t create product', { id: toastId })
+    
+        const toastId = toast.loading('Creating product...',{duration: 200});
+    
+        const res = await addProduct(productData);
+    
+        if (res.data) {  // Success case
+            toast.success(res.data.message, { 
+                id: toastId,
+                duration: 2000 
+            });
+            methods.reset();
+        } else if (res.error) {  // Error case
+            const errorMessage = (res.error as any).data?.message || 'Failed to create product';
+            toast.error(errorMessage, { 
+                id: toastId,
+                duration: 3000 
+            });
         }
     };
 

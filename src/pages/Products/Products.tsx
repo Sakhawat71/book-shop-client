@@ -29,11 +29,11 @@ const Products = () => {
     });
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 bg-gray-100 shadow-2xs">
             {/* Search & Filters Section */}
             <div className="sticky top-0 bg-base-100 z-10 border-b border-gray-200">
                 {/* Search Bar */}
-                <div className="relative max-w-2xl mx-auto mb-6">
+                <div className="relative max-w-2xl mx-auto mb-6 bg-gray-200">
                     <input
                         type="text"
                         placeholder="Search books..."

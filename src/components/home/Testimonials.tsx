@@ -6,7 +6,7 @@ const TestimonialsAndBlogs = () => {
             name: "Sarah Johnson",
             location: "New York, USA",
             comment: "I absolutely love BookHub! The selection is incredible, and the delivery is always on time. Highly recommend!",
-            image: "",
+            image: "https://i.ibb.co.com/x7NGnrY/profile.png",
             rating: 5
         },
         {
@@ -14,7 +14,7 @@ const TestimonialsAndBlogs = () => {
             name: "Michael Smith",
             location: "London, UK",
             comment: "The best online bookstore I've ever used. Great prices and excellent customer service.",
-            image: "",
+            image: "https://i.ibb.co.com/MDCQdKNq/69854120-9467799.jpg",
             rating: 4.5
         },
         {
@@ -22,7 +22,7 @@ const TestimonialsAndBlogs = () => {
             name: "Emily Davis",
             location: "Sydney, Australia",
             comment: "BookHub has made reading so much more accessible for me. I can't imagine shopping anywhere else!",
-            image: "",
+            image: "https://i.ibb.co.com/x7NGnrY/profile.png",
             rating: 5
         }
     ];
@@ -33,22 +33,22 @@ const TestimonialsAndBlogs = () => {
             id: 1,
             title: "Top 10 Must-Read Books of 2024",
             excerpt: "Discover the most anticipated books of the year, from gripping thrillers to heartwarming memoirs.",
-            image: "",
-            link: "/blog/top-10-books-2024"
+            image: "https://i.ibb.co.com/RkyXqytt/23945937-6891838.jpg",
+            link: "#"
         },
         {
             id: 2,
             title: "How to Build a Reading Habit",
             excerpt: "Learn practical tips to make reading a daily habit and enjoy the benefits of a book-filled life.",
-            image: "",
-            link: "/blog/build-reading-habit"
+            image: "https://i.ibb.co.com/012Y6DV/23945910-6891641.jpg",
+            link: "#"
         },
         {
             id: 3,
             title: "The Benefits of Reading Before Bed",
             excerpt: "Find out why reading before bed can improve your sleep and overall well-being.",
-            image: "",
-            link: "/blog/reading-before-bed"
+            image: "https://i.ibb.co.com/pB7bztw2/23945885-6891726.jpg",
+            link: "#"
         }
     ];
 
@@ -97,11 +97,11 @@ const TestimonialsAndBlogs = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {blogs.map(blog => (
                         <div key={blog.id} className="card bg-base-100 shadow-lg">
-                            <figure className="px-4 pt-4">
+                            <figure className="px-4 pt-4 w-80 flex justify-center items-center mx-auto">
                                 <img
                                     src={blog.image}
                                     alt={blog.title}
-                                    className="rounded-xl h-48 w-full object-cover"
+                                    className="rounded-xl h-full w-full "
                                 />
                             </figure>
                             <div className="card-body">

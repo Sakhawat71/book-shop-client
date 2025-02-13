@@ -7,6 +7,7 @@ import CTextarea from "../../../components/customForm/CTextarea";
 import CSelect from "../../../components/customForm/CSelect";
 import { toast } from "sonner";
 
+
 const AddProducts = () => {
     const [addProduct] = useAddProductMutation();
 
@@ -149,9 +150,10 @@ const AddProducts = () => {
                         padding: '12px',
                         fontSize: '16px',
                         fontWeight: '600',
-                        backgroundColor: '#44b584',
+                        backgroundColor: '#5D62FF',
                         border: 'none',
                         borderRadius: '6px',
+                        color: 'white',
                         cursor: 'pointer',
                     }}
                 >

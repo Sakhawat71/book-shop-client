@@ -16,6 +16,7 @@ const AddProducts = () => {
             author: "",
             price: 0,
             category: "",
+            image: "",
             description: "",
             quantity: 0,
             inStock: true,
@@ -27,7 +28,7 @@ const AddProducts = () => {
             ...data,
             price: Number(data.price),
             quantity: Number(data.quantity),
-            inStock: Boolean(data.inStock)
+            inStock: Boolean(data.inStock) || true ,
         };
 
         const toastId = toast.loading('Creating product...', { duration: 200 });
@@ -74,6 +75,15 @@ const AddProducts = () => {
                         required
                     />
 
+                    {/* image */}
+                    <CInput
+                        type="text"
+                        name="image"
+                        label="Image Url"
+                        placeholder="Enter image url"
+                        required
+                    />
+
                     {/* Price */}
                     <CInput
                         type="number"
@@ -99,20 +109,20 @@ const AddProducts = () => {
                         }
                     />
 
-                    {/* Description */}
-                    <CTextarea
-                        name="description"
-                        label="Description"
-                        placeholder="Enter product description"
-                        required
-                    />
-
                     {/* Quantity */}
                     <CInput
                         type="number"
                         name="quantity"
                         label="Quantity"
                         placeholder="Enter product quantity"
+                        required
+                    />
+
+                    {/* Description */}
+                    <CTextarea
+                        name="description"
+                        label="Description"
+                        placeholder="Enter product description"
                         required
                     />
 

@@ -10,8 +10,11 @@ const adminManagementApi = baseApi.injectEndpoints({
                     method: 'GET',
                 }
             }
-
         }),
+
+        
+
+
     })
 });
 

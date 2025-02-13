@@ -15,6 +15,8 @@ import ManageOrders from "../pages/Dashboard/Admin/ManageOrders";
 import AddProducts from "../pages/Dashboard/Admin/AddProducts";
 import ManageProducts from "../pages/Dashboard/Admin/ManageProducts";
 import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
+import UserProfile from "../pages/Dashboard/User/UserProfile";
+import UserOrders from "../pages/Dashboard/User/UserOrders";
 
 
 const router = createBrowserRouter([
@@ -36,11 +38,11 @@ const router = createBrowserRouter([
                 children: [
                     {
                         index : true,
-                        element: <div>user</div>
+                        element: <UserProfile />
                     },
                     {
                         path: 'my-orders',
-                        element: <div>user orders</div>
+                        element: <UserOrders />
                     },
                 ]
             },

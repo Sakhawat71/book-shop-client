@@ -55,8 +55,8 @@ const CheckoutPage = () => {
             const res = await createOrder(orderPayload).unwrap();
             const checkoutUrl = res?.data?.payment?.checkout_url;
 
-            console.log("res : ",res);
-            console.log(checkoutUrl);
+            // console.log("res : ",res);
+            // console.log(checkoutUrl);
 
             if (checkoutUrl) {
                 window.location.href = checkoutUrl;

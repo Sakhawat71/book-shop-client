@@ -10,8 +10,12 @@ const AboutUs = () => {
                     </p>
                 </div>
                 <div className="mt-10 flex flex-col md:flex-row items-center">
-                    <div className="md:w-1/2">
-                        <img src="path_to_image.jpg" alt="BookNest Store" className="rounded-lg shadow-lg" />
+                    <div className="md:w-1/2 flex mx-auto justify-center items-center">
+                        <img
+                            src="/public/logo.svg"
+                            alt="BookNest Store"
+                            className="rounded-lg shadow-lg w-[50%]"
+                        />
                     </div>
                     <div className="md:w-1/2 md:pl-10 mt-6 md:mt-0">
                         <h2 className="text-2xl font-semibold mb-4">Our Journey</h2>
@@ -33,7 +37,7 @@ const AboutUs = () => {
                         <div className="w-64 m-4">
                             <div className="card shadow-lg">
                                 <figure>
-                                    <img src="path_to_team_member1.jpg" alt="Team Member 1" className="rounded-t-lg" />
+                                    <img src="https://i.ibb.co.com/kqHCD0d/userprofile.png" alt="Team Member 1" className="rounded-t-lg" />
                                 </figure>
                                 <div className="card-body">
                                     <h3 className="card-title">Jane Doe</h3>
@@ -45,7 +49,7 @@ const AboutUs = () => {
                         <div className="w-64 m-4">
                             <div className="card shadow-lg">
                                 <figure>
-                                    <img src="path_to_team_member2.jpg" alt="Team Member 2" className="rounded-t-lg" />
+                                    <img src="https://i.ibb.co.com/x7NGnrY/profile.png" alt="Team Member 2" className="rounded-t-lg" />
                                 </figure>
                                 <div className="card-body">
                                     <h3 className="card-title">John Smith</h3>

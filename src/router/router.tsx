@@ -4,8 +4,8 @@ import Register from "../pages/auth/Register";
 import MainLayout from "../components/layout/MainLayout";
 import Products from "../pages/Products/Products";
 import AboutUs from "../pages/AboutUs";
-import UserDashboard from "../pages/Dashboard/UserDashboard";
-import AdminDashboard from "../pages/Dashboard/AdminDashboard";
+import UserDashboard from "../pages/Dashboard/User/UserDashboard";
+import AdminDashboard from "../pages/Dashboard/Admin/AdminDashboard";
 import ProtectedRoute from "../utils/ProtectedRoute";
 import ProductDetails from "../pages/Products/ProductDetails";
 import HomePage from "../pages/home/HomePage";
@@ -46,6 +46,24 @@ const router = createBrowserRouter([
                         <AdminDashboard />
                     </ProtectedRoute>
                 ),
+                children : [
+                    {
+                        path : '',
+                        element: <div></div>
+                    },
+                    {
+                        path : 'manage-users',
+                        element: <div></div>
+                    },
+                    {
+                        path : 'manage-orders',
+                        element: <div></div>
+                    },
+                    {
+                        path : 'manage-products',
+                        element: <div></div>
+                    },
+                ]
             },
             {
                 path: '/products',

@@ -5,8 +5,9 @@ import { IProduct } from "../../types/productes.type";
 
 const Products = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const { data: products, isLoading } = useGetProductsQuery({ searchTerm });
+    const { data: products, isLoading } = useGetProductsQuery(searchTerm);
     
+
     // Frontend filter states
     const [category, setCategory] = useState('');
     const [author, setAuthor] = useState('');
@@ -30,7 +31,7 @@ const Products = () => {
     return (
         <div className="container mx-auto px-4 py-8">
             {/* Search & Filters Section */}
-            <div className="sticky top-0 bg-base-100 z-10 pb-6 border-b border-gray-200">
+            <div className="sticky top-0 bg-base-100 z-10 border-b border-gray-200">
                 {/* Search Bar */}
                 <div className="relative max-w-2xl mx-auto mb-6">
                     <input

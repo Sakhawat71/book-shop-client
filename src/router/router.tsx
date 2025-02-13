@@ -28,6 +28,16 @@ const router = createBrowserRouter([
                         <UserDashboard />
                     </ProtectedRoute>
                 ),
+                children: [
+                    // {
+                        
+                    //     element: <div>user</div>
+                    // },
+                    {
+                        path: 'my-profile',
+                        element: <div>user</div>
+                    },
+                ]
             },
             {
                 path: '/admin/dashboard',

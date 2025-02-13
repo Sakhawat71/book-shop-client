@@ -12,20 +12,6 @@ const UserDashboard = () => {
 
     const userLink = (
         <>
-            {/* <li>
-                <NavLink
-                    to={'my-profile'}
-                    className={({ isActive, isPending }) =>
-                        isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
-                    }
-                    onClick={() => setIsSidebarOpen(false)} // Close sidebar on mobile
-                >
-                    <span className="flex items-center gap-2">
-                        My Profile
-                    </span>
-                </NavLink>
-            </li> */}
-
             <li>
                 <NavLink
                     to={'my-orders'}

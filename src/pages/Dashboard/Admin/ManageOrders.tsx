@@ -1,6 +1,5 @@
 import {Button, Spin, Table } from "antd";
 import { useGetAllOrdersQuery } from "../../../redux/features/order/orderManagement.api";
-import { toast } from "sonner";
 
 const ManageOrders = () => {
     const { data, isLoading, error } = useGetAllOrdersQuery(undefined);

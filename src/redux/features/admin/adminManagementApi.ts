@@ -12,7 +12,14 @@ const adminManagementApi = baseApi.injectEndpoints({
             }
         }),
 
-        
+        addProduct: builder.mutation({
+            query: (data) => ({
+                url: '/products',
+                method: 'POST',
+                body: data,
+            })
+        })
+
 
 
     })
@@ -20,5 +27,6 @@ const adminManagementApi = baseApi.injectEndpoints({
 
 
 export const {
-useGetUsersQuery,
+    useGetUsersQuery,
+    useAddProductMutation,
 } = adminManagementApi;

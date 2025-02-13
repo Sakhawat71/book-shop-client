@@ -12,7 +12,7 @@ const AboutUs = () => {
                 <div className="mt-10 flex flex-col md:flex-row items-center">
                     <div className="md:w-1/2 flex mx-auto justify-center items-center">
                         <img
-                            src="/public/logo.svg"
+                            src="https://i.ibb.co.com/pB7bztw2/23945885-6891726.jpg"
                             alt="BookNest Store"
                             className="rounded-lg shadow-lg w-[50%]"
                         />
